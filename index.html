@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ejemplo de Mostrar Nombre del Anime y Número del Episodio</title>
+        <style>
+            :root {
+                --header-height: 69px;
+                --header-backgroundColor: rgba(8,8,64,1);
+            }
+            
+            @font-face {
+                font-family: 'Lexend';
+                src: url('Lexend.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            * {
+                margin: 0;
+                font-family: 'Lexend';
+            }
+
+            body{
+                background-color: rgba(0,0,0,0.25);
+            }
+
+            header {
+                background-color: var(--header-backgroundColor);
+                height: var(--header-height);
+                display: flex;
+                align-items: center;
+
+                #pageName {
+                    color: white;
+                    font-size: 32px;
+                    padding: 16px;
+                    border: 0px;
+                    background: none;
+                    font-weight: bold;
+                }
+
+                .buttons {
+                    width: 100%;
+                    padding: 16px;
+                    display: flex;
+                    align-items: self-end;
+                    justify-content: flex-end;
+
+                    .button{
+                        height: 37px;
+                        color: rgba(255, 255, 255, 0.75);
+                        font-size: 16px;
+                        padding: 8px;
+                        border: 0px;
+                        background: none;
+                        font-weight: bold;
+                    }
+
+                    .button:hover{
+                        background-color: rgba(255,255,255,0.2);
+                        border-radius: 4px;
+                    }
+
+                }
+            }
+
+            #main {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                width: calc(100% - 16px);
+                padding: 8px;
+                min-height: calc(100vh - var(--header-height));
+                    h1{
+                        padding: 0px 8px;
+                        margin-top: 16px;
+                    }
+                    .list {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        width: 100%;
+                        justify-content: center;
+
+                        .item {
+                            border-radius: 4px;
+                            position: relative;
+                            width: calc(100% / 8 - 16px);
+                            margin: 8px;
+                            overflow: hidden;
+                            transition: 0.25s;
+                            .banner {
+                                width: 100%;
+                                border-radius: 4px;
+                                margin-bottom: -4px;
+                                transition: 0.25s;
+
+                            }
+                            .type {
+                                background-color: rgba(0,0,128,1);
+                                display: block;
+                                border-radius: 4px 0px 8px 0px;
+                                position: absolute;
+                                padding: 4px 8px;
+                                font-weight: bold;
+                                top: 0px;
+                                color: white;
+                            }
+                            .name {
+                                background: linear-gradient(0deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+                                color: rgba(255, 255, 255, 1);
+                                position: absolute;
+                                border-radius: 0px 0px 4px 4px;
+                                padding: 8px;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                bottom: 0px;
+                                width: calc(100% - 16px);
+                                transform: scale(0) translateY(100%);
+                                transition: 0.25s;
+                                font-weight: bold;
+                            }
+                        }
+                        .item:hover {
+                            background-image: url(/images/T3RybyBU7XR1bG8g_HorizontalBanner.png);
+                            box-shadow: 0px 0px 32px black;
+                            .banner {
+                                transform: scale(1.25);
+                            }
+                            
+                            .name {
+                                transform: scale(1);
+                            }
+                        }
+                    }
+                
+            }
+            
+            #anime {
+                border-radius: 8px;
+                display: none;
+                background-color: green;
+                width: calc(100% - 16px);
+                min-height: calc(100vh - var(--header-height) - 16px);
+                position: absolute;
+                top: calc(var(--header-height) + 8px);
+                left: 8px;
+            }
+            #episode {
+                border-radius: 8px;
+                display: none;
+                background-color: blue;
+                width: calc(100% - 16px);
+                min-height: calc(100vh - var(--header-height) - 16px);
+                position: absolute;
+                top: calc(var(--header-height) + 8px);
+                left: 8px;
+            }
+
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <button id="pageName"   onclick="window.location.href = './'">TOKYDIA</button>
+            <div class="buttons">
+                <button class="button" onclick="window.location.href = './'">Inicio</button>
+                <button class="button" onclick="window.location.href = './?directory'">Directorio</button>
+            </div>
+            <!--<button id="pageButton" onclick="window.location.href = './?anime=12'"              >Anime</button>     -->
+            <!--<button id="pageButton" onclick="window.location.href = './?anime=12?episode=1'"    >Anime Ep</button>  -->
+            <!--<button id="pageButton" onclick="window.location.href = './?episode=1'"             >Ep</button>        -->
+        </header>
+          
+        <section id="main">
+            <h1>No olvides activar las notificaciones</h1>
+            <h1>Ultimos episodios</h1>
+            <div id="lastEpisode" class="list"></div>
+            <h1>Ultimos animes agregados</h1>
+            <div id="lastAnimes"  class="list"></div>
+            <h1>Ultimas peliculas agregadas</h1>
+            <div id="lastFilms"   class="list"></div>
+            <h1>Animes finalizados</h1>
+            <div id="finishedAnimes"  class="list"></div>
+        </section>
+        <section id="anime">
+            <h1 id="infoAnime">Hola, este es el anime: </h1>
+        </section>
+        <section id="episode">
+            <h1 id="infoAnime">Hola, este es el anime: </h1>
+            <p id="infoEpisodio">Número del episodio: </p>
+        </section>
+        <script>
+            $(document).ready(function() {
+                $.getJSON('database.json', function(data) {
+                    var animes = data.animes;
+                    data.lastEpisodes.reverse().slice(0, 24).forEach(function(lastEpisode) {
+                        var anime = animes[lastEpisode.id];
+                        var episode = lastEpisode.number;
+                        var newItem = ''
+                        newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}?episode=${episode}'">`;
+                        newItem += `<img src="/images/${anime.id}_HorizontalBanner.png" class="banner">`;
+                        newItem += `<p class="type">${anime.type == "Anime"? `Episode ${episode}`: anime.type}</p>`;
+                        newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
+                        newItem += `</div>`;
+                        $('#lastEpisode').append(newItem);
+                    });
+                    data.lastAnimes.reverse().slice(0, 24).forEach(function(lastAnime) {
+                        var anime = animes[lastAnime.id];
+                        var newItem = ''
+                        newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
+                        newItem += `<img src="/images/${anime.id}_VerticalBanner.png" class="banner">`;
+                        newItem += `<p class="type">${anime.type}</p>`;
+                        newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
+                        newItem += `</div>`;
+                        $('#lastAnimes').append(newItem);
+                    });
+                    data.lastFilms.reverse().slice(0, 24).forEach(function(lastFilm) {
+                        var anime = animes[lastFilm.id];
+                        var newItem = ''
+                        newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
+                        newItem += `<img src="/images/${anime.id}_VerticalBanner.png" class="banner">`;
+                        newItem += `<p class="type">${anime.type}</p>`;
+                        newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
+                        newItem += `</div>`;
+                        $('#lastFilms').append(newItem);
+                    });
+                    data.finishedAnimes.reverse().slice(0, 24).forEach(function(finishedAnime) {
+                        var anime = animes[finishedAnime.id];
+                        var newItem = ''
+                        newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
+                        newItem += `<img src="/images/${anime.id}_VerticalBanner.png" class="banner">`;
+                        newItem += `<p class="type">${anime.type}</p>`;
+                        newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
+                        newItem += `</div>`;
+                        $('#finishedAnimes').append(newItem);
+                    });
+
+                });
+            });
+        </script>
+        <script>
+            // Función para obtener parámetros de la URL
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, '\\$&');
+                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
+
+            // Verificar si el parámetro 'anime' está presente en la URL
+            var parametroAnime = getParameterByName('anime');
+            var parametroEpisode = getParameterByName('episode');
+
+            if (parametroAnime && parametroEpisode) {
+                document.getElementById('main').style.display = 'none';
+                document.getElementById('anime').style.display = 'none';
+                document.getElementById('episode').style.display = 'block';
+                document.getElementById('infoAnime').innerText += parametroAnime;
+
+                var parametroEpisode = getParameterByName('episode');
+                if (parametroEpisode) {
+                    document.getElementById('infoEpisodio').innerText += parametroEpisode;
+                }
+
+            } else if (parametroEpisode) {
+                window.location.href = '.';
+            } else if (parametroAnime){
+                document.getElementById('main').style.display = 'none';
+                document.getElementById('anime').style.display = 'block';
+                document.getElementById('episode').style.display = 'none';
+            } else {
+                document.getElementById('main').style.display = '';
+                document.getElementById('anime').style.display = 'none';
+                document.getElementById('episode').style.display = 'none';
+            }
+        </script>
+    </body>
+</html>
