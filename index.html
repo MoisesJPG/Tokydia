@@ -202,7 +202,7 @@
                         var episode = lastEpisode.number;
                         var newItem = ''
                         newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}?episode=${episode}'">`;
-                        newItem += `<img src="/images/${anime.id}_HorizontalBanner.png" class="banner">`;
+                        newItem += `<img src="./images/${anime.id}_HorizontalBanner.png" class="banner">`;
                         newItem += `<p class="type">${anime.type == "Anime"? `Episode ${episode}`: anime.type}</p>`;
                         newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
                         newItem += `</div>`;
@@ -212,7 +212,7 @@
                         var anime = animes[lastAnime.id];
                         var newItem = ''
                         newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
-                        newItem += `<img src="/images/${anime.id}_VerticalBanner.png" class="banner">`;
+                        newItem += `<img src="./images/${anime.id}_VerticalBanner.png" class="banner">`;
                         newItem += `<p class="type">${anime.type}</p>`;
                         newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
                         newItem += `</div>`;
@@ -222,7 +222,7 @@
                         var anime = animes[lastFilm.id];
                         var newItem = ''
                         newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
-                        newItem += `<img src="/images/${anime.id}_VerticalBanner.png" class="banner">`;
+                        newItem += `<img src="./images/${anime.id}_VerticalBanner.png" class="banner">`;
                         newItem += `<p class="type">${anime.type}</p>`;
                         newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
                         newItem += `</div>`;
@@ -232,7 +232,7 @@
                         var anime = animes[finishedAnime.id];
                         var newItem = ''
                         newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
-                        newItem += `<img src="/images/${anime.id}_VerticalBanner.png" class="banner">`;
+                        newItem += `<img src="./images/${anime.id}_VerticalBanner.png" class="banner">`;
                         newItem += `<p class="type">${anime.type}</p>`;
                         newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
                         newItem += `</div>`;
