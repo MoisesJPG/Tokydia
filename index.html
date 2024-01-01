@@ -328,7 +328,7 @@
                             var newItem = ''
                             newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}&episode=${episode}'">`;
                             newItem += `<img src="./images/${anime.id}_HorizontalBanner.png" class="banner">`;
-                            newItem += `<p class="type">${anime.type == "Anime"? `Episode ${episode}`: anime.type}</p>`;
+                            newItem += `<p class="type">${anime.type == "Anime"? `Episodio ${episode}`: anime.type}</p>`;
                             newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
                             newItem += `</div>`;
                             $('#lastEpisode').append(newItem);
