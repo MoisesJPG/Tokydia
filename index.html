@@ -81,6 +81,7 @@
                     h1{
                         padding: 0px 8px;
                     }
+
                     .listHeader{
                         display: flex;
                         justify-content: space-between;
@@ -92,6 +93,7 @@
                             border: 1px solid black;
                         }
                     }
+
                     .list {
                         display: flex;
                         flex-direction: row;
@@ -102,10 +104,11 @@
                         .item {
                             border-radius: 4px;
                             position: relative;
-                            width: calc(100% / 4 - 16px);
+                            width: calc(100% / 8 - 16px);
                             margin: 8px;
                             overflow: hidden;
                             transition: 0.25s;
+
                             .banner {
                                 width: 100%;
                                 border-radius: 4px;
@@ -270,10 +273,6 @@
                         if(anime.type == "Film") { document.getElementById('animeTitle').innerText = `${anime.name}`; }
                     });
                 });
-
-                //document.getElementById("episodeUrl").addEventListener('fullscreenchange', () => {
-                //    console.log('El iframe está en modo pantalla completa');
-                //});
             } else if (parametroEpisode) {
                 window.location.href = '.';
             } else if (parametroAnime){
