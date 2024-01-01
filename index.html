@@ -200,23 +200,33 @@
           
         <section id="main">
             <h1>No olvides activar las notificaciones</h1>
+
             <div class="listHeader">
                 <h1>Ultimos episodios</h1>
                 <button id="hiddenLastEpisode"                        onclick="document.getElementById('showLastEpisode').style.display = ''; document.getElementById('hiddenLastEpisode').style.display = 'none'; document.getElementById('lastEpisode').style.display = 'none'">-</button>
                 <button id="showLastEpisode"   style="display: none;" onclick="document.getElementById('showLastEpisode').style.display = 'none'; document.getElementById('hiddenLastEpisode').style.display = ''; document.getElementById('lastEpisode').style.display = ''">+</button>
             </div>
             <div id="lastEpisode" class="list"></div>
+
             <div class="listHeader">
                 <h1>Ultimos animes agregados</h1>
                 <button id="hiddenLastAnimes"                        onclick="document.getElementById('showLastAnimes').style.display = ''; document.getElementById('hiddenLastAnimes').style.display = 'none'; document.getElementById('lastAnimes').style.display = 'none'">-</button>
                 <button id="showLastAnimes"   style="display: none;" onclick="document.getElementById('showLastAnimes').style.display = 'none'; document.getElementById('hiddenLastAnimes').style.display = ''; document.getElementById('lastAnimes').style.display = ''">+</button>
             </div>
             <div id="lastAnimes"  class="list"></div>
-            <div class="separator"></div>
-            <h1>Ultimas peliculas agregadas</h1>
+            
+            <div class="listHeader">
+                <h1>Ultimas peliculas agregadas</h1>
+                <button id="hiddenLastFilms"                        onclick="document.getElementById('showLastFilms').style.display = ''; document.getElementById('hiddenLastFilms').style.display = 'none'; document.getElementById('lastFilms').style.display = 'none'">-</button>
+                <button id="showLastFilms"   style="display: none;" onclick="document.getElementById('showLastFilms').style.display = 'none'; document.getElementById('hiddenLastFilms').style.display = ''; document.getElementById('lastFilms').style.display = ''">+</button>
+            </div>
             <div id="lastFilms"   class="list"></div>
-            <div class="separator"></div>
-            <h1>Animes finalizados</h1>
+            
+            <div class="listHeader">
+                <h1>Animes finalizados</h1>
+                <button id="hiddenFinishedAnimes"                        onclick="document.getElementById('showFinishedAnimes').style.display = ''; document.getElementById('hiddenFinishedAnimes').style.display = 'none'; document.getElementById('finishedAnimes').style.display = 'none'">-</button>
+                <button id="showFinishedAnimes"   style="display: none;" onclick="document.getElementById('showFinishedAnimes').style.display = 'none'; document.getElementById('hiddenFinishedAnimes').style.display = ''; document.getElementById('finishedAnimes').style.display = ''">+</button>
+            </div>
             <div id="finishedAnimes"  class="list"></div>
         </section>
         <section id="anime">
