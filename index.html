@@ -141,7 +141,7 @@
             
             #anime {
                 border-radius: 8px;
-                display: none;
+                display: block;
                 background-color: green;
                 width: calc(100% - 16px);
                 min-height: calc(100vh - var(--header-height) - 16px);
@@ -151,8 +151,7 @@
             }
             #episode {
                 border-radius: 8px;
-                display: none;
-                background-color: blue;
+                display: block;
                 width: calc(100% - 16px);
                 min-height: calc(100vh - var(--header-height) - 16px);
                 position: absolute;
@@ -171,8 +170,8 @@
                 <button class="button" onclick="window.location.href = './?directory'">Directorio</button>
             </div>
             <!--<button id="pageButton" onclick="window.location.href = './?anime=12'"              >Anime</button>     -->
-            <!--<button id="pageButton" onclick="window.location.href = './?anime=12?episode=1'"    >Anime Ep</button>  -->
-            <!--<button id="pageButton" onclick="window.location.href = './?episode=1'"             >Ep</button>        -->
+            <!--<button id="pageButton" onclick="window.location.href = './?anime=12&episode=1'"    >Anime Ep</button>  -->
+            <!--<button id="pageButton" onclick="window.location.href = './&episode=1'"             >Ep</button>        -->
         </header>
           
         <section id="main">
@@ -188,60 +187,12 @@
         </section>
         <section id="anime">
             <h1 id="infoAnime">Hola, este es el anime: </h1>
-        </section>
-        <section id="episode">
-            <h1 id="infoAnime">Hola, este es el anime: </h1>
             <p id="infoEpisodio">Número del episodio: </p>
         </section>
-        <script>
-            $(document).ready(function() {
-                $.getJSON('database.json', function(data) {
-                    var animes = data.animes;
-                    data.lastEpisodes.reverse().slice(0, 24).forEach(function(lastEpisode) {
-                        var anime = animes[lastEpisode.id];
-                        var episode = lastEpisode.number;
-                        var newItem = ''
-                        newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}?episode=${episode}'">`;
-                        newItem += `<img src="./images/${anime.id}_HorizontalBanner.png" class="banner">`;
-                        newItem += `<p class="type">${anime.type == "Anime"? `Episode ${episode}`: anime.type}</p>`;
-                        newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
-                        newItem += `</div>`;
-                        $('#lastEpisode').append(newItem);
-                    });
-                    data.lastAnimes.reverse().slice(0, 24).forEach(function(lastAnime) {
-                        var anime = animes[lastAnime.id];
-                        var newItem = ''
-                        newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
-                        newItem += `<img src="./images/${anime.id}_VerticalBanner.png" class="banner">`;
-                        newItem += `<p class="type">${anime.type}</p>`;
-                        newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
-                        newItem += `</div>`;
-                        $('#lastAnimes').append(newItem);
-                    });
-                    data.lastFilms.reverse().slice(0, 24).forEach(function(lastFilm) {
-                        var anime = animes[lastFilm.id];
-                        var newItem = ''
-                        newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
-                        newItem += `<img src="./images/${anime.id}_VerticalBanner.png" class="banner">`;
-                        newItem += `<p class="type">${anime.type}</p>`;
-                        newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
-                        newItem += `</div>`;
-                        $('#lastFilms').append(newItem);
-                    });
-                    data.finishedAnimes.reverse().slice(0, 24).forEach(function(finishedAnime) {
-                        var anime = animes[finishedAnime.id];
-                        var newItem = ''
-                        newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
-                        newItem += `<img src="./images/${anime.id}_VerticalBanner.png" class="banner">`;
-                        newItem += `<p class="type">${anime.type}</p>`;
-                        newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
-                        newItem += `</div>`;
-                        $('#finishedAnimes').append(newItem);
-                    });
-
-                });
-            });
-        </script>
+        <section id="episode">
+            <select id="selectEpisodeUrl" onchange="document.getElementById('episodeUrl').src = this.value"></select>
+            <iframe id="episodeUrl" style="width: 100%; height: calc(100vh - var(--header-height) - 16px);" src="" frameborder="0" allowfullscreen></iframe>
+        </section>
         <script>
             // Función para obtener parámetros de la URL
             function getParameterByName(name, url) {
@@ -259,26 +210,88 @@
             var parametroEpisode = getParameterByName('episode');
 
             if (parametroAnime && parametroEpisode) {
-                document.getElementById('main').style.display = 'none';
-                document.getElementById('anime').style.display = 'none';
-                document.getElementById('episode').style.display = 'block';
-                document.getElementById('infoAnime').innerText += parametroAnime;
+                document.getElementById('main').remove();
+                document.getElementById('anime').remove();
+                document.getElementById('episode');
+                $(document).ready(function() {
+                    $.getJSON('database.json', function(data) {
+                        var animes = data.animes;
+                        let loop = 1;
+                        animes[parametroAnime].episodeUrls[parametroEpisode-1].forEach(url => {
+                            document.getElementById("selectEpisodeUrl").innerHTML += `<option value="${url}">Option ${loop++}</option>`
+                        });
+                        document.getElementById('episodeUrl').src = animes[parametroAnime].episodeUrls[parametroEpisode-1][0];
+                        //document.getElementById('infoAnime').innerText = animes[parametroAnime].name;
+                        //document.getElementById('infoEpisodio').innerText = parametroEpisode;
+                    });
+                });
 
-                var parametroEpisode = getParameterByName('episode');
-                if (parametroEpisode) {
-                    document.getElementById('infoEpisodio').innerText += parametroEpisode;
-                }
-
+                //document.getElementById("episodeUrl").addEventListener('fullscreenchange', () => {
+                //    console.log('El iframe está en modo pantalla completa');
+                //});
             } else if (parametroEpisode) {
                 window.location.href = '.';
             } else if (parametroAnime){
-                document.getElementById('main').style.display = 'none';
-                document.getElementById('anime').style.display = 'block';
-                document.getElementById('episode').style.display = 'none';
+                document.getElementById('main').remove();
+                document.getElementById('anime');
+                document.getElementById('episode').remove();
+                $(document).ready(function() {
+                    $.getJSON('database.json', function(data) {
+                        var animes = data.animes;
+                        document.getElementById('infoAnime').innerText = animes[parametroAnime].name;
+                    });
+                });
             } else {
-                document.getElementById('main').style.display = '';
-                document.getElementById('anime').style.display = 'none';
-                document.getElementById('episode').style.display = 'none';
+                document.getElementById('main');
+                document.getElementById('anime').remove();
+                document.getElementById('episode').remove();
+                $(document).ready(function() {
+                    $.getJSON('database.json', function(data) {
+                        var animes = data.animes;
+                        data.lastEpisodes.reverse().slice(0, 24).forEach(function(lastEpisode) {
+                            var anime = animes[lastEpisode.id];
+                            var episode = lastEpisode.number;
+                            var newItem = ''
+                            newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}&episode=${episode}'">`;
+                            newItem += `<img src="./images/${anime.id}_HorizontalBanner.png" class="banner">`;
+                            newItem += `<p class="type">${anime.type == "Anime"? `Episode ${episode}`: anime.type}</p>`;
+                            newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
+                            newItem += `</div>`;
+                            $('#lastEpisode').append(newItem);
+                        });
+                        data.lastAnimes.reverse().slice(0, 24).forEach(function(lastAnime) {
+                            var anime = animes[lastAnime.id];
+                            var newItem = ''
+                            newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
+                            newItem += `<img src="./images/${anime.id}_VerticalBanner.png" class="banner">`;
+                            newItem += `<p class="type">${anime.type}</p>`;
+                            newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
+                            newItem += `</div>`;
+                            $('#lastAnimes').append(newItem);
+                        });
+                        data.lastFilms.reverse().slice(0, 24).forEach(function(lastFilm) {
+                            var anime = animes[lastFilm.id];
+                            var newItem = ''
+                            newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
+                            newItem += `<img src="./images/${anime.id}_VerticalBanner.png" class="banner">`;
+                            newItem += `<p class="type">${anime.type}</p>`;
+                            newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
+                            newItem += `</div>`;
+                            $('#lastFilms').append(newItem);
+                        });
+                        data.finishedAnimes.reverse().slice(0, 24).forEach(function(finishedAnime) {
+                            var anime = animes[finishedAnime.id];
+                            var newItem = ''
+                            newItem += `<div class="item" onclick="window.location.href='?anime=${anime.id}'">`;
+                            newItem += `<img src="./images/${anime.id}_VerticalBanner.png" class="banner">`;
+                            newItem += `<p class="type">${anime.type}</p>`;
+                            newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
+                            newItem += `</div>`;
+                            $('#finishedAnimes').append(newItem);
+                        });
+
+                    });
+                });
             }
         </script>
     </body>

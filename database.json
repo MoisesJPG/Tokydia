@@ -22,8 +22,8 @@
         { "id": "b43fd2189c3010b2", "number": 20 },
         { "id": "b43fd2189c3010b2", "number": 21 },
         { "id": "b43fd2189c3010b2", "number": 22 },
-        { "id": "b43fd2189c3010b2", "number": 23 },
-        { "id": "a11d3d3020bf951d", "number": 0 }
+        { "id": "a11d3d3020bf951d", "number": 1 },
+        { "id": "5d290541a178d032", "number": 1 }
     ],
     "lastAnimes": [
         { "id": "10f5810c6cff20db" },
@@ -49,7 +49,7 @@
         { "id": "10f5810c6cff20db" },
         { "id": "10f5810c6cff20db" },
         { "id": "10f5810c6cff20db" },
-        { "id": "b43fd2189c3010b2" }
+        { "id": "5d290541a178d032" }
     ],
     "finishedAnimes": [
         { "id": "a11d3d3020bf951d" },
@@ -153,6 +153,20 @@
             "name": "Jujutsu Kaisen 0",
             "type": "Film",
             "episodes": 1,
+            "state": "Finished",
+            "categories": "Action, Fantasy",
+            "episodeUrls": [
+                [
+                    "https://mega.nz/embed/pG931IQY#YheQrZ7RH0GFxHtXMDP-OLlok2hTBRD-VIowf_EMWGU",
+                    "https://mega.nz/embed/xX1GELIC#X6EOKDTlXAxhT-dKpVjdVmil95o3-iln7fzwcPDOAls"
+                ]
+            ]
+        },
+        "5d290541a178d032": {
+            "id": "5d290541a178d032",
+            "name": "Mob Psycho 100",
+            "type": "Anime",
+            "episodes": 24,
             "state": "Finished",
             "categories": "Action, Fantasy",
             "episodeUrls": [
