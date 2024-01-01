@@ -25,7 +25,12 @@
             body{
                 background-color: rgba(0,0,0,0.25);
             }
-
+            .separator {
+                width: 100%;
+                height: 1px;
+                background-color: var(--header-backgroundColor);
+                margin: 8px 0px;
+            }
             header {
                 background-color: var(--header-backgroundColor);
                 height: var(--header-height);
@@ -75,7 +80,17 @@
                 min-height: calc(100vh - var(--header-height));
                     h1{
                         padding: 0px 8px;
-                        margin-top: 16px;
+                    }
+                    .listHeader{
+                        display: flex;
+                        justify-content: space-between;
+                        height: 32px;
+
+                        button{
+                            width: 32px;
+                            border-radius: 4px;
+                            border: 1px solid black;
+                        }
                     }
                     .list {
                         display: flex;
@@ -149,6 +164,7 @@
                 top: calc(var(--header-height) + 8px);
                 left: 8px;
             }
+
             #episode {
                 border-radius: 8px;
                 display: block;
@@ -157,6 +173,17 @@
                 position: absolute;
                 top: calc(var(--header-height) + 8px);
                 left: 8px;
+
+                #episodeHeader{
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: row;
+
+                    select {
+                        padding: 8px;
+                        border-radius: 4px;
+                    }
+                }
             }
 
         </style>
@@ -169,19 +196,26 @@
                 <button class="button" onclick="window.location.href = './'">Inicio</button>
                 <button class="button" onclick="window.location.href = './?directory'">Directorio</button>
             </div>
-            <!--<button id="pageButton" onclick="window.location.href = './?anime=12'"              >Anime</button>     -->
-            <!--<button id="pageButton" onclick="window.location.href = './?anime=12&episode=1'"    >Anime Ep</button>  -->
-            <!--<button id="pageButton" onclick="window.location.href = './&episode=1'"             >Ep</button>        -->
         </header>
           
         <section id="main">
             <h1>No olvides activar las notificaciones</h1>
-            <h1>Ultimos episodios</h1>
+            <div class="listHeader">
+                <h1>Ultimos episodios</h1>
+                <button id="hiddenLastEpisode"                        onclick="document.getElementById('showLastEpisode').style.display = ''; document.getElementById('hiddenLastEpisode').style.display = 'none'; document.getElementById('lastEpisode').style.display = 'none'">-</button>
+                <button id="showLastEpisode"   style="display: none;" onclick="document.getElementById('showLastEpisode').style.display = 'none'; document.getElementById('hiddenLastEpisode').style.display = ''; document.getElementById('lastEpisode').style.display = ''">+</button>
+            </div>
             <div id="lastEpisode" class="list"></div>
-            <h1>Ultimos animes agregados</h1>
+            <div class="listHeader">
+                <h1>Ultimos animes agregados</h1>
+                <button id="hiddenLastAnimes"                        onclick="document.getElementById('showLastAnimes').style.display = ''; document.getElementById('hiddenLastAnimes').style.display = 'none'; document.getElementById('lastAnimes').style.display = 'none'">-</button>
+                <button id="showLastAnimes"   style="display: none;" onclick="document.getElementById('showLastAnimes').style.display = 'none'; document.getElementById('hiddenLastAnimes').style.display = ''; document.getElementById('lastAnimes').style.display = ''">+</button>
+            </div>
             <div id="lastAnimes"  class="list"></div>
+            <div class="separator"></div>
             <h1>Ultimas peliculas agregadas</h1>
             <div id="lastFilms"   class="list"></div>
+            <div class="separator"></div>
             <h1>Animes finalizados</h1>
             <div id="finishedAnimes"  class="list"></div>
         </section>
@@ -190,7 +224,8 @@
             <p id="infoEpisodio">Número del episodio: </p>
         </section>
         <section id="episode">
-            <select id="selectEpisodeUrl" onchange="document.getElementById('episodeUrl').src = this.value"></select>
+            <div id="episodeHeader"><h1 id="animeTitle"></h1><select id="selectEpisodeUrl" onchange="document.getElementById('episodeUrl').src = this.value"></select></div>
+            <div class="separator"></div>
             <iframe id="episodeUrl" style="width: 100%; height: calc(100vh - var(--header-height) - 16px);" src="" frameborder="0" allowfullscreen></iframe>
         </section>
         <script>
@@ -215,14 +250,14 @@
                 document.getElementById('episode');
                 $(document).ready(function() {
                     $.getJSON('database.json', function(data) {
-                        var animes = data.animes;
+                        var anime = data.animes[parametroAnime];
                         let loop = 1;
-                        animes[parametroAnime].episodeUrls[parametroEpisode-1].forEach(url => {
+                        anime.episodeUrls[parametroEpisode-1].forEach(url => {
                             document.getElementById("selectEpisodeUrl").innerHTML += `<option value="${url}">Option ${loop++}</option>`
                         });
-                        document.getElementById('episodeUrl').src = animes[parametroAnime].episodeUrls[parametroEpisode-1][0];
-                        //document.getElementById('infoAnime').innerText = animes[parametroAnime].name;
-                        //document.getElementById('infoEpisodio').innerText = parametroEpisode;
+                        document.getElementById('episodeUrl').src = anime.episodeUrls[parametroEpisode-1][0];
+                        if(anime.type == "Anime") { document.getElementById('animeTitle').innerText = `${anime.name} - Episode ${parametroEpisode}`; }
+                        if(anime.type == "Film") { document.getElementById('animeTitle').innerText = `${anime.name}`; }
                     });
                 });
 
