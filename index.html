@@ -79,83 +79,76 @@
                 display: block;
             }
             #main {
-                h1 {
-                    padding: 0px 8px;
-                }
-
-                .listHeader {
-                    display: flex;
-                    justify-content: space-between;
-                    height: 32px;
-                    button{
-                        width: 32px;
-                        border-radius: 4px;
-                        border: 1px solid black;
-                    }
-                }
-            
-                .list {
-                    display: flex;
-                    flex-direction: row;
-                    flex-wrap: wrap;
-                    width: 100%;
-                    justify-content: center;
                 
-                    .item {
-                        border-radius: 4px;
-                        position: relative;
-                        width: calc(100% / 6 - 16px);
-                        margin: 8px;
-                        overflow: hidden;
-                        transition: 0.25s;
-                    
-                        .banner {
-                            width: 100%;
-                            border-radius: 4px;
-                            margin-bottom: -4px;
-                            transition: 0.25s;
-                        }
-
-                        .type {
-                            background-color: rgba(0,0,128,1);
-                            display: block;
-                            border-radius: 4px 0px 8px 0px;
-                            position: absolute;
-                            padding: 4px 8px;
-                            font-weight: bold;
-                            top: 0px;
-                            color: white;
-                            font-size: 12px;
-                        }
-
-                        .name {
-                            background: linear-gradient(0deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-                            color: rgba(255, 255, 255, 1);
-                            position: absolute;
-                            border-radius: 0px 0px 4px 4px;
-                            padding: 8px;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            bottom: 0px;
-                            width: calc(100% - 16px);
-                            transform: scale(0) translateY(100%);
-                            transition: 0.25s;
-                            font-weight: bold;
-                        }
-                    }
-                    .item:hover {
-                        box-shadow: 0px 0px 32px rgba(0,0,128,1);
-                        .banner {
-                            transform: scale(1.25);
-                        }
-                        
-                        .name {
-                            transform: scale(1);
-                        }
-                    }
-                }
-                
+            }
+            #main h1 {
+                padding: 0px 8px;
+            }
+            #main .listHeader {
+                display: flex;
+                justify-content: space-between;
+                height: 32px;
+            }
+            #main .listHeader button{
+                width: 32px;
+                border-radius: 4px;
+                border: 1px solid black;
+            }
+            #main .list {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 100%;
+                justify-content: center;
+            }
+            #main .list .item {
+                border-radius: 4px;
+                position: relative;
+                width: calc(100% / 6 - 16px);
+                margin: 8px;
+                overflow: hidden;
+                transition: 0.25s;
+            }
+            #main .list .item .banner {
+                width: 100%;
+                border-radius: 4px;
+                margin-bottom: -4px;
+                transition: 0.25s;
+            }
+            #main .list .item .type {
+                background-color: rgba(0,0,128,1);
+                display: block;
+                border-radius: 4px 0px 8px 0px;
+                position: absolute;
+                padding: 4px 8px;
+                font-weight: bold;
+                top: 0px;
+                color: white;
+                font-size: 12px;
+            }
+            #main .list .item .name {
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+                color: rgba(255, 255, 255, 1);
+                position: absolute;
+                border-radius: 0px 0px 4px 4px;
+                padding: 8px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                bottom: 0px;
+                width: calc(100% - 16px);
+                transform: scale(0) translateY(100%);
+                transition: 0.25s;
+                font-weight: bold;
+            }
+            #main .list .item:hover {
+                box-shadow: 0px 0px 32px rgba(0,0,128,1);
+            }
+            #main .list .item:hover .banner {
+                transform: scale(1.25);
+            }
+            #main .list .item:hover .name {
+                transform: scale(1);
             }
             
             #anime {
