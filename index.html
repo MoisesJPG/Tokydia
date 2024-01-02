@@ -251,40 +251,6 @@
                 <button id="showLastEpisode"   style="display: none;" onclick="showLastEpisode()">+</button>
             </div>
             <div id="lastEpisode" class="list"></div>
-<script>
-  // Función para mostrar el último episodio
-  function showLastEpisode() {
-    document.getElementById('showLastEpisode').style.display = 'none';
-    document.getElementById('hiddenLastEpisode').style.display = '';
-    document.getElementById('lastEpisode').style.display = '';
-
-    // Guardar el estado en localStorage
-    localStorage.setItem('lastEpisodeDisplay', '');
-  }
-
-  // Función para ocultar el último episodio
-  function hideLastEpisode() {
-    document.getElementById('showLastEpisode').style.display = '';
-    document.getElementById('hiddenLastEpisode').style.display = 'none';
-    document.getElementById('lastEpisode').style.display = 'none';
-
-    // Guardar el estado en localStorage
-    localStorage.setItem('lastEpisodeDisplay', 'none');
-  }
-
-  // Verificar el estado almacenado en localStorage al cargar la página
-  document.addEventListener('DOMContentLoaded', function () {
-    var lastEpisodeDisplay = localStorage.getItem('lastEpisodeDisplay');
-
-    // Si el estado es 'none', ocultar el último episodio
-    if (lastEpisodeDisplay === 'none') {
-      hideLastEpisode();
-    } else {
-      // Mostrar el último episodio por defecto si el estado no es 'none'
-      showLastEpisode();
-    }
-  });
-</script>
             
             <div class="listHeader">
                 <h1>Ultimos animes agregados</h1>
@@ -306,6 +272,46 @@
                 <button id="showFinishedAnimes"   style="display: none;" onclick="document.getElementById('showFinishedAnimes').style.display = 'none'; document.getElementById('hiddenFinishedAnimes').style.display = ''; document.getElementById('finishedAnimes').style.display = ''">+</button>
             </div>
             <div id="finishedAnimes"  class="list"></div>
+            <script>
+                function showLastEpisode() {
+                    document.getElementById('showLastEpisode').style.display = 'none';
+                    document.getElementById('hiddenLastEpisode').style.display = '';
+                    document.getElementById('lastEpisode').style.display = '';
+                    localStorage.setItem('lastEpisodeDisplay', '');
+                }
+                function hideLastEpisode() {
+                    document.getElementById('showLastEpisode').style.display = '';
+                    document.getElementById('hiddenLastEpisode').style.display = 'none';
+                    document.getElementById('lastEpisode').style.display = 'none';
+                    localStorage.setItem('lastEpisodeDisplay', 'none');
+                }
+                function showLastAnime() {
+                    document.getElementById('showLastAnime').style.display = 'none';
+                    document.getElementById('hiddenLastAnime').style.display = '';
+                    document.getElementById('lastAnime').style.display = '';
+                    localStorage.setItem('lastAnimeDisplay', '');
+                }
+                function hideLastAnime() {
+                    document.getElementById('showLastAnime').style.display = '';
+                    document.getElementById('hiddenLastAnime').style.display = 'none';
+                    document.getElementById('lastAnime').style.display = 'none';
+                    localStorage.setItem('lastAnimeDisplay', 'none');
+                }
+                document.addEventListener('DOMContentLoaded', function () {
+                    var lastEpisodeDisplay = localStorage.getItem('lastEpisodeDisplay');
+                    if (lastEpisodeDisplay === 'none') {
+                        hideLastEpisode();
+                    } else {
+                        showLastEpisode();
+                    }
+                    var lastAnimesDisplay = localStorage.getItem('lastAnimeDisplay');
+                    if (lastAnimesDisplay === 'none') {
+                        hideLastAnime();
+                    } else {
+                        showLastAnime();
+                    }
+                });
+            </script>
         </section>
         <section id="anime">
             <div id="animeInfo">
