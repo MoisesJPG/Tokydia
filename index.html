@@ -269,10 +269,10 @@
             
             <div class="listHeader">
                 <h1>Ultimas peliculas agregadas</h1>
-                <button id="hiddenLastFilms"                        onclick="document.getElementById('showLastFilms').style.display = ''; document.getElementById('hiddenLastFilms').style.display = 'none'; document.getElementById('lastFilms').style.display = 'none'">-</button>
-                <button id="showLastFilms"   style="display: none;" onclick="document.getElementById('showLastFilms').style.display = 'none'; document.getElementById('hiddenLastFilms').style.display = ''; document.getElementById('lastFilms').style.display = ''">+</button>
+                <button id="hiddenLastFilm"                        onclick="hideLastFilm()">-</button>
+                <button id="showLastFilm"   style="display: none;" onclick="showLastFilm()">+</button>
             </div>
-            <div id="lastFilms"   class="list"></div>
+            <div id="lastFilm"   class="list"></div>
             
             <div class="listHeader">
                 <h1>Animes finalizados</h1>
@@ -305,19 +305,23 @@
                     document.getElementById('lastAnime').style.display = 'none';
                     localStorage.setItem('lastAnimeDisplay', 'none');
                 }
+                function showLastFilm() {
+                    document.getElementById('showLastFilm').style.display = 'none';
+                    document.getElementById('hiddenLastFilm').style.display = '';
+                    document.getElementById('lastFilm').style.display = '';
+                    localStorage.setItem('lastFilmDisplay', '');
+                }
+                function hideLastFilm() {
+                    document.getElementById('showLastFilm').style.display = '';
+                    document.getElementById('hiddenLastFilm').style.display = 'none';
+                    document.getElementById('lastFilm').style.display = 'none';
+                    localStorage.setItem('lastFilmDisplay', 'none');
+                }
                 document.addEventListener('DOMContentLoaded', function () {
-                    var lastEpisodeDisplay = localStorage.getItem('lastEpisodeDisplay');
-                    if (lastEpisodeDisplay === 'none') {
-                        hideLastEpisode();
-                    } else {
-                        showLastEpisode();
-                    }
-                    var lastAnimeDisplay = localStorage.getItem('lastAnimeDisplay');
-                    if (lastAnimeDisplay === 'none') {
-                        hideLastAnime();
-                    } else {
-                        showLastAnime();
-                    }
+                    if (localStorage.getItem('lastEpisodeDisplay') === 'none') { hideLastEpisode(); } else { showLastEpisode(); }
+                    if (localStorage.getItem('lastAnimeDisplay') === 'none') { hideLastAnime(); } else { showLastAnime(); }
+                    if (localStorage.getItem('lastFilmDisplay') === 'none') { hideLastFilm(); } else { showLastFilm(); }
+                    if (localStorage.getItem('lastAnimeDisplay') === 'none') { hideLastAnime(); } else { showLastAnime(); }
                 });
             </script>
         </section>
