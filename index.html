@@ -276,11 +276,11 @@
   document.addEventListener('DOMContentLoaded', function () {
     var lastEpisodeDisplay = localStorage.getItem('lastEpisodeDisplay');
 
-    // Si el estado es 'none' o vacío, ocultar el último episodio
-    if (lastEpisodeDisplay === 'none' || lastEpisodeDisplay === '') {
+    // Si el estado es 'none', ocultar el último episodio
+    if (lastEpisodeDisplay === 'none') {
       hideLastEpisode();
     } else {
-      // Mostrar el último episodio por defecto si el estado no es 'none' ni vacío
+      // Mostrar el último episodio por defecto si el estado no es 'none'
       showLastEpisode();
     }
   });
