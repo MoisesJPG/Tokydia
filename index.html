@@ -30,6 +30,9 @@
                 background-color: rgba(8,8,64,1);
                 margin: 8px 0px;
             }
+            #viewport {
+                position: absolute;
+            }
             header {
                 background-color: rgba(8,8,64,1);
                 height: 69px;
@@ -224,7 +227,7 @@
                 var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
                 var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
-                alert('Ancho del viewport: ' + viewportWidth + ', Altura del viewport: ' + viewportHeight);
+                document.getElementById("viewport").innerText = viewportWidth + ' x ' + viewportHeight;
             });
 
             // Para mostrar la alerta inicialmente
@@ -233,6 +236,7 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </head>
     <body>
+        <h1 id="viewport"></h1>
         <header>
             <button id="pageName"   onclick="window.location.href = './'">TOKYDIA</button>
             <div class="buttons">
