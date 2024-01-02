@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <script>
+            var version = "1.1"
+        </script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tokydia</title>
@@ -335,7 +338,7 @@
                 var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
                 var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
-                document.getElementById("viewport").innerText = viewportWidth + ' x ' + viewportHeight;
+                document.getElementById("viewport").innerText = 'v' + version + ' ' + iewportWidth + ' x ' + viewportHeight;
             });
 
             // Para mostrar la alerta inicialmente
