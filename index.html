@@ -247,11 +247,45 @@
 
             <div class="listHeader">
                 <h1>Ultimos episodios</h1>
-                <button id="hiddenLastEpisode"                        onclick="document.getElementById('showLastEpisode').style.display = ''; document.getElementById('hiddenLastEpisode').style.display = 'none'; document.getElementById('lastEpisode').style.display = 'none'">-</button>
-                <button id="showLastEpisode"   style="display: none;" onclick="document.getElementById('showLastEpisode').style.display = 'none'; document.getElementById('hiddenLastEpisode').style.display = ''; document.getElementById('lastEpisode').style.display = ''">+</button>
+                <button id="hiddenLastEpisode"                        onclick="showLastEpisode()">-</button>
+                <button id="showLastEpisode"   style="display: none;" onclick="hideLastEpisode()">+</button>
             </div>
             <div id="lastEpisode" class="list"></div>
+<script>
+  // Función para mostrar el último episodio
+  function showLastEpisode() {
+    document.getElementById('showLastEpisode').style.display = 'none';
+    document.getElementById('hiddenLastEpisode').style.display = '';
+    document.getElementById('lastEpisode').style.display = '';
 
+    // Guardar el estado en localStorage
+    localStorage.setItem('lastEpisodeDisplay', '');
+  }
+
+  // Función para ocultar el último episodio
+  function hideLastEpisode() {
+    document.getElementById('showLastEpisode').style.display = '';
+    document.getElementById('hiddenLastEpisode').style.display = 'none';
+    document.getElementById('lastEpisode').style.display = 'none';
+
+    // Guardar el estado en localStorage
+    localStorage.setItem('lastEpisodeDisplay', 'none');
+  }
+
+  // Verificar el estado almacenado en localStorage al cargar la página
+  document.addEventListener('DOMContentLoaded', function () {
+    var lastEpisodeDisplay = localStorage.getItem('lastEpisodeDisplay');
+
+    // Si el estado es 'none' o vacío, ocultar el último episodio
+    if (lastEpisodeDisplay === 'none' || lastEpisodeDisplay === '') {
+      hideLastEpisode();
+    } else {
+      // Mostrar el último episodio por defecto si el estado no es 'none' ni vacío
+      showLastEpisode();
+    }
+  });
+</script>
+            
             <div class="listHeader">
                 <h1>Ultimos animes agregados</h1>
                 <button id="hiddenLastAnimes"                        onclick="document.getElementById('showLastAnimes').style.display = ''; document.getElementById('hiddenLastAnimes').style.display = 'none'; document.getElementById('lastAnimes').style.display = 'none'">-</button>
