@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <script>
-            var version = "1.1"
+            var version = "1.0.1"
         </script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -257,8 +257,8 @@
             
             <div class="listHeader">
                 <h1>Ultimos animes agregados</h1>
-                <button id="hiddenLastAnimes"                        onclick="document.getElementById('showLastAnimes').style.display = ''; document.getElementById('hiddenLastAnimes').style.display = 'none'; document.getElementById('lastAnimes').style.display = 'none'">-</button>
-                <button id="showLastAnimes"   style="display: none;" onclick="document.getElementById('showLastAnimes').style.display = 'none'; document.getElementById('hiddenLastAnimes').style.display = ''; document.getElementById('lastAnimes').style.display = ''">+</button>
+                <button id="hiddenLastAnimes"                        onclick="hideLastAnime()">-</button>
+                <button id="showLastAnimes"   style="display: none;" onclick="showLastAnime()">+</button>
             </div>
             <div id="lastAnimes"  class="list"></div>
             
