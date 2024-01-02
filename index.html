@@ -257,10 +257,10 @@
             
             <div class="listHeader">
                 <h1>Ultimos animes agregados</h1>
-                <button id="hiddenLastAnimes"                        onclick="hideLastAnime()">-</button>
-                <button id="showLastAnimes"   style="display: none;" onclick="showLastAnime()">+</button>
+                <button id="hiddenLastAnime"                        onclick="hideLastAnime()">-</button>
+                <button id="showLastAnime"   style="display: none;" onclick="showLastAnime()">+</button>
             </div>
-            <div id="lastAnimes"  class="list"></div>
+            <div id="lastAnime"  class="list"></div>
             
             <div class="listHeader">
                 <h1>Ultimas peliculas agregadas</h1>
@@ -307,8 +307,8 @@
                     } else {
                         showLastEpisode();
                     }
-                    var lastAnimesDisplay = localStorage.getItem('lastAnimeDisplay');
-                    if (lastAnimesDisplay === 'none') {
+                    var lastAnimeDisplay = localStorage.getItem('lastAnimeDisplay');
+                    if (lastAnimeDisplay === 'none') {
                         hideLastAnime();
                     } else {
                         showLastAnime();
@@ -422,7 +422,7 @@
                             newItem += `<p class="type">${anime.type}</p>`;
                             newItem += `<p class="name" title="${anime.name}">${anime.name}</p>`;
                             newItem += `</div>`;
-                            $('#lastAnimes').append(newItem);
+                            $('#lastAnime').append(newItem);
                         });
                         data.lastFilms.reverse().slice(0, 24).forEach(function(lastFilm) {
                             var anime = animes[lastFilm.id];
