@@ -41,7 +41,7 @@
                 background-color: black;
                 color: white;
                 z-index: 999;
-                width: 100%;
+                width: calc(100% - 16px);
                 text-align: center;
             }
             header {
@@ -234,7 +234,7 @@
         </style>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </head>
-    <body>
+    <body id="body">
         <p id="viewport"></p>
         <header>
             <button id="pageName"   onclick="window.location.href = './'">TOKYDIA</button>
@@ -274,66 +274,6 @@
                 <button id="showFinishedAnime"   style="display: none;" onclick="showFinishedAnime()">+</button>
             </div>
             <div id="finishedAnime"  class="list"></div>
-            <script>
-                function showLastEpisode() {
-                    document.getElementById('showLastEpisode').style.display = 'none';
-                    document.getElementById('hiddenLastEpisode').style.display = '';
-                    document.getElementById('lastEpisode').style.display = '';
-                    localStorage.setItem('lastEpisodeDisplay', '');
-                }
-                function hideLastEpisode() {
-                    document.getElementById('showLastEpisode').style.display = '';
-                    document.getElementById('hiddenLastEpisode').style.display = 'none';
-                    document.getElementById('lastEpisode').style.display = 'none';
-                    localStorage.setItem('lastEpisodeDisplay', 'none');
-                }
-                
-                function showLastAnime() {
-                    document.getElementById('showLastAnime').style.display = 'none';
-                    document.getElementById('hiddenLastAnime').style.display = '';
-                    document.getElementById('lastAnime').style.display = '';
-                    localStorage.setItem('lastAnimeDisplay', '');
-                }
-                function hideLastAnime() {
-                    document.getElementById('showLastAnime').style.display = '';
-                    document.getElementById('hiddenLastAnime').style.display = 'none';
-                    document.getElementById('lastAnime').style.display = 'none';
-                    localStorage.setItem('lastAnimeDisplay', 'none');
-                }
-                
-                function showLastFilm() {
-                    document.getElementById('showLastFilm').style.display = 'none';
-                    document.getElementById('hiddenLastFilm').style.display = '';
-                    document.getElementById('lastFilm').style.display = '';
-                    localStorage.setItem('lastFilmDisplay', '');
-                }
-                function hideLastFilm() {
-                    document.getElementById('showLastFilm').style.display = '';
-                    document.getElementById('hiddenLastFilm').style.display = 'none';
-                    document.getElementById('lastFilm').style.display = 'none';
-                    localStorage.setItem('lastFilmDisplay', 'none');
-                }
-                
-                function showFinishedAnime() {
-                    document.getElementById('showFinishedAnime').style.display = 'none';
-                    document.getElementById('hiddenFinishedAnime').style.display = '';
-                    document.getElementById('finishedAnime').style.display = '';
-                    localStorage.setItem('finishedAnimeDisplay', '');
-                }
-                function hideFinishedAnime() {
-                    document.getElementById('showFinishedAnime').style.display = '';
-                    document.getElementById('hiddenFinishedAnime').style.display = 'none';
-                    document.getElementById('finishedAnime').style.display = 'none';
-                    localStorage.setItem('finishedAnimeDisplay', 'none');
-                }
-                
-                document.addEventListener('DOMContentLoaded', function () {
-                    if (localStorage.getItem('lastEpisodeDisplay') === 'none') { hideLastEpisode(); } else { showLastEpisode(); }
-                    if (localStorage.getItem('lastAnimeDisplay') === 'none') { hideLastAnime(); } else { showLastAnime(); }
-                    if (localStorage.getItem('lastFilmDisplay') === 'none') { hideLastFilm(); } else { showLastFilm(); }
-                    if (localStorage.getItem('finishedAnimeDisplay') === 'none') { hideFinishedAnime(); } else { showFinishedAnime(); }
-                });
-            </script>
         </section>
         <section id="anime">
             <div id="animeInfo">
@@ -408,6 +348,11 @@
                 $(document).ready(function() {
                     $.getJSON('database.json', function(data) {
                         var animes = data.animes;
+                        document.getElementById('body').style.backgroundImage = `url('./images/${animes[parametroAnime].id}_VerticalBanner.png')`;
+                        document.getElementById('body').style.backgroundSize = `cover`;
+                        document.getElementById('body').style.backgroundPosition = `center`;
+                        document.getElementById('body').style.height = `100vh`;
+                        document.getElementById('body').style.backdropFilter = `blur(32px)`;
                         document.getElementById('animeName').innerText = animes[parametroAnime].name;
                         document.getElementById('animeType').innerText = animes[parametroAnime].type;
                         document.getElementById('animeSinopsis').innerText = animes[parametroAnime].sinopsis;
@@ -468,6 +413,66 @@
 
                     });
                 });
+                {
+                    function showLastEpisode() {
+                        document.getElementById('showLastEpisode').style.display = 'none';
+                        document.getElementById('hiddenLastEpisode').style.display = '';
+                        document.getElementById('lastEpisode').style.display = '';
+                        localStorage.setItem('lastEpisodeDisplay', '');
+                    }
+                    function hideLastEpisode() {
+                        document.getElementById('showLastEpisode').style.display = '';
+                        document.getElementById('hiddenLastEpisode').style.display = 'none';
+                        document.getElementById('lastEpisode').style.display = 'none';
+                        localStorage.setItem('lastEpisodeDisplay', 'none');
+                    }
+                    
+                    function showLastAnime() {
+                        document.getElementById('showLastAnime').style.display = 'none';
+                        document.getElementById('hiddenLastAnime').style.display = '';
+                        document.getElementById('lastAnime').style.display = '';
+                        localStorage.setItem('lastAnimeDisplay', '');
+                    }
+                    function hideLastAnime() {
+                        document.getElementById('showLastAnime').style.display = '';
+                        document.getElementById('hiddenLastAnime').style.display = 'none';
+                        document.getElementById('lastAnime').style.display = 'none';
+                        localStorage.setItem('lastAnimeDisplay', 'none');
+                    }
+                    
+                    function showLastFilm() {
+                        document.getElementById('showLastFilm').style.display = 'none';
+                        document.getElementById('hiddenLastFilm').style.display = '';
+                        document.getElementById('lastFilm').style.display = '';
+                        localStorage.setItem('lastFilmDisplay', '');
+                    }
+                    function hideLastFilm() {
+                        document.getElementById('showLastFilm').style.display = '';
+                        document.getElementById('hiddenLastFilm').style.display = 'none';
+                        document.getElementById('lastFilm').style.display = 'none';
+                        localStorage.setItem('lastFilmDisplay', 'none');
+                    }
+                    
+                    function showFinishedAnime() {
+                        document.getElementById('showFinishedAnime').style.display = 'none';
+                        document.getElementById('hiddenFinishedAnime').style.display = '';
+                        document.getElementById('finishedAnime').style.display = '';
+                        localStorage.setItem('finishedAnimeDisplay', '');
+                    }
+                    function hideFinishedAnime() {
+                        document.getElementById('showFinishedAnime').style.display = '';
+                        document.getElementById('hiddenFinishedAnime').style.display = 'none';
+                        document.getElementById('finishedAnime').style.display = 'none';
+                        localStorage.setItem('finishedAnimeDisplay', 'none');
+                    }
+                    
+                    document.addEventListener('DOMContentLoaded', function () {
+                        if (localStorage.getItem('lastEpisodeDisplay') === 'none') { hideLastEpisode(); } else { showLastEpisode(); }
+                        if (localStorage.getItem('lastAnimeDisplay') === 'none') { hideLastAnime(); } else { showLastAnime(); }
+                        if (localStorage.getItem('lastFilmDisplay') === 'none') { hideLastFilm(); } else { showLastFilm(); }
+                        if (localStorage.getItem('finishedAnimeDisplay') === 'none') { hideFinishedAnime(); } else { showFinishedAnime(); }
+                    });
+                }
             }
         </script>
     </body>
