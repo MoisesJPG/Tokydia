@@ -31,7 +31,7 @@
                 margin: 8px 0px;
             }
             #viewport {
-                position: absolute;
+                position: fixed;
                 top: 0px;
                 left: 0px;
                 padding: 8px;
@@ -227,17 +227,6 @@
             }
 
         </style>
-        <script>
-            window.addEventListener('resize', function() {
-                var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-                var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-                document.getElementById("viewport").innerText = viewportWidth + ' x ' + viewportHeight;
-            });
-
-            // Para mostrar la alerta inicialmente
-            window.dispatchEvent(new Event('resize'));
-        </script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </head>
     <body>
@@ -298,6 +287,17 @@
             <div class="separator"></div>
             <iframe id="episodeUrl" src="" frameborder="0" allowfullscreen></iframe>
         </section>
+        <script>
+            window.addEventListener('resize', function() {
+                var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+                var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+                document.getElementById("viewport").innerText = viewportWidth + ' x ' + viewportHeight;
+            });
+
+            // Para mostrar la alerta inicialmente
+            window.dispatchEvent(new Event('resize'));
+        </script>
         <script>
             // Función para obtener parámetros de la URL
             function getParameterByName(name, url) {
